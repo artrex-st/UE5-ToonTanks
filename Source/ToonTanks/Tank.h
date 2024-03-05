@@ -14,6 +14,9 @@ public:
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+protected:
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Tank Components")
 	class USpringArmComponent* SpringArm;
@@ -26,4 +29,6 @@ private:
 
 	void Move(float Value);
 	void Turn(float Value);
+
+	APlayerController* PlayerControllerRef;
 };
