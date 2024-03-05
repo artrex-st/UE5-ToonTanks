@@ -24,13 +24,16 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::Move(float Value)
 {
-	FVector DeltaLocation = FVector::ZeroVector;
 	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+	FVector DeltaLocation = FVector::ZeroVector;
 	DeltaLocation.X = Value * TankSpeed * DeltaTime;
-	AddActorLocalOffset(DeltaLocation);
+	AddActorLocalOffset(DeltaLocation, true);
 }
 
 void ATank::Turn(float Value)
 {
-	UE_LOG(LogTemp, Display, TEXT("Z: Axis: %f"), Value);
+	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+	FRotator Rotation = FRotator::ZeroRotator;
+	Rotation.Yaw = Value * TurnRate * DeltaTime;
+	AddActorLocalRotation(Rotation, true);
 }

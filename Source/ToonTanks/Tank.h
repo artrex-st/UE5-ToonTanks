@@ -20,8 +20,10 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Tank Components")
 	class UCameraComponent* Camera;
 	UPROPERTY(EditAnywhere, Category = "Tank Movement")
-	float TankSpeed = 1;
-	
+	float TankSpeed = 100;
+	UPROPERTY(EditAnywhere, Category = "Tank Movement")
+	double TurnRate = 100;
+
 	void Move(float Value);
 	void Turn(float Value);
 };
