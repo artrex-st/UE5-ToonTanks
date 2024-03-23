@@ -22,6 +22,12 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 }
 
+void ATank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	FollowCursor();
+}
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
@@ -42,4 +48,15 @@ void ATank::Turn(float Value)
 	FRotator Rotation = FRotator::ZeroRotator;
 	Rotation.Yaw = Value * TurnRate * DeltaTime;
 	AddActorLocalRotation(Rotation, true);
+}
+
+
+void ATank::FollowCursor() const
+{
+	if (PlayerControllerRef)
+	{
+		FHitResult HitResult;
+		PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,false,HitResult);
+		DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20,10, FColor::Emerald,false, -1);
+	}
 }
