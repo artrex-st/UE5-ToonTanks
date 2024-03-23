@@ -16,6 +16,8 @@ public:
 
 protected:
 	void RotateTurret(const FVector& LookAtTarget) const;
+	UPROPERTY(EditAnywhere, Category = "Tower Movement")
+	double TurnInterpolateSpeed = 10;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

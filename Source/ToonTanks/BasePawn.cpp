@@ -4,6 +4,7 @@
 #include "BasePawn.h"
 
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ABasePawn::ABasePawn()
@@ -26,5 +27,6 @@ void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
 {
 	const FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
 	const FRotator LookAtRotation = FRotator(0, ToTarget.Rotation().Yaw, 0);
-	TurretMesh->SetWorldRotation(LookAtRotation);
+	
+	TurretMesh->SetWorldRotation(FMath::RInterpTo(TurretMesh->GetComponentRotation(), LookAtRotation, UGameplayStatics::GetWorldDeltaSeconds(this), TurnInterpolateSpeed));
 }
