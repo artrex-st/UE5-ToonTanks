@@ -57,6 +57,9 @@ void ATank::FollowCursor() const
 	{
 		FHitResult HitResult;
 		PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,false,HitResult);
+		RotateTurret(HitResult.ImpactPoint);
 		DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20,10, FColor::Emerald,false, -1);
+		//UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *(HitResult.ImpactPoint - Owner->GetActorLocation()).ToString());
+		
 	}
 }
