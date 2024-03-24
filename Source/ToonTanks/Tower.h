@@ -25,4 +25,10 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Tower Combat")
 	float FireRange = 500.f;
+	UPROPERTY(EditAnywhere, Category = "Tower Combat")
+	float FireRate = 2.f;
+
+	FTimerHandle FireRateTimerHandler;
+	void CheckFireCondition();
+	bool InFireRange() const;
 };
