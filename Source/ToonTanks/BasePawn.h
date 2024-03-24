@@ -16,6 +16,8 @@ public:
 
 protected:
 	void RotateTurret(const FVector& LookAtTarget) const;
+	void Fire();
+
 	UPROPERTY(EditAnywhere, Category = "Tower Movement")
 	double TurnInterpolateSpeed = 10;
 

@@ -11,6 +11,7 @@ ABasePawn::ABasePawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
 	RootComponent = CapsuleComponent;
 
@@ -29,4 +30,10 @@ void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
 	const FRotator LookAtRotation = FRotator(0, ToTarget.Rotation().Yaw, 0);
 	
 	TurretMesh->SetWorldRotation(FMath::RInterpTo(TurretMesh->GetComponentRotation(), LookAtRotation, UGameplayStatics::GetWorldDeltaSeconds(this), TurnInterpolateSpeed));
+}
+
+void ABasePawn::Fire()
+{
+	FVector SpawnPoint = ProjectileSpawnPoint->GetComponentLocation();
+	DrawDebugSphere(GetWorld(),SpawnPoint,30,10,FColor::Purple,false, 3.f);
 }
