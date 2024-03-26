@@ -29,10 +29,17 @@ void ATank::Tick(float DeltaTime)
 	FollowCursor();
 }
 
+void ATank::HandlerDestruction()
+{
+	Super::HandlerDestruction();
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	PlayerControllerRef = Cast<APlayerController>(GetController());
+	TankPlayerController = Cast<APlayerController>(GetController());
 }
 
 void ATank::Move(float Value)
@@ -54,10 +61,10 @@ void ATank::Turn(float Value)
 
 void ATank::FollowCursor() const
 {
-	if (PlayerControllerRef)
+	if (TankPlayerController)
 	{
 		FHitResult HitResult;
-		PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,false,HitResult);
+		TankPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility,false,HitResult);
 		RotateTurret(HitResult.ImpactPoint);
 		DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20,10, FColor::Emerald,false, -1);
 		//UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *(HitResult.ImpactPoint - Owner->GetActorLocation()).ToString());

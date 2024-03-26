@@ -25,6 +25,13 @@ ABasePawn::ABasePawn()
 	
 }
 
+void ABasePawn::HandlerDestruction()
+{
+	// Destroy
+	// Start SFX
+	// start VFX
+}
+
 void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
 {
 	const FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();

@@ -14,6 +14,8 @@ public:
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void HandlerDestruction() override;
+	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
 
 protected:
 	virtual void BeginPlay() override;
@@ -32,5 +34,5 @@ private:
 	void Turn(float Value);
 	void FollowCursor() const;
 
-	APlayerController* PlayerControllerRef;
+	APlayerController* TankPlayerController;
 };
