@@ -28,6 +28,11 @@ ABasePawn::ABasePawn()
 void ABasePawn::HandlerDestruction()
 {
 	// Start SFX
+	if (DeathSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(GetWorld(), DeathSound, GetActorLocation());
+	}
+
 	// start VFX
 	if (DeathParticles)
 	{
