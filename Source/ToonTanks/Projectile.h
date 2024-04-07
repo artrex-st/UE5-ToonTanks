@@ -26,6 +26,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	class UProjectileMovementComponent* ProjectileMovement;
 
+	UPROPERTY(VisibleAnywhere, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	class UParticleSystemComponent* TrailParticles;
+
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UParticleSystem* HitParticles;
 

@@ -4,6 +4,7 @@
 #include "Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 
 AProjectile::AProjectile()
 {
@@ -14,6 +15,9 @@ AProjectile::AProjectile()
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("Projectile Movement"));
 	ProjectileMovement->MaxSpeed = 2000.f;
 	ProjectileMovement->InitialSpeed = 1000.f;
+
+	TrailParticles = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Trail Particles"));
+	TrailParticles->SetupAttachment(RootComponent);
 }
 
 void AProjectile::Tick(float DeltaTime)
