@@ -27,9 +27,12 @@ ABasePawn::ABasePawn()
 
 void ABasePawn::HandlerDestruction()
 {
-	// Destroy
 	// Start SFX
 	// start VFX
+	if (DeathParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathParticles, GetActorLocation(), GetActorRotation());
+	}
 }
 
 void ABasePawn::RotateTurret(const FVector& LookAtTarget) const
