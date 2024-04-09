@@ -3,6 +3,7 @@
 #include "Tank.h"
 
 #include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -41,6 +42,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	TankPlayerController = Cast<APlayerController>(GetController());
+	SetTankLocationZ();
 }
 
 void ATank::Move(float Value)
@@ -70,5 +72,24 @@ void ATank::FollowCursor() const
 		//DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20,10, FColor::Emerald,false, -1);
 		//UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *(HitResult.ImpactPoint - Owner->GetActorLocation()).ToString());
 		
+	}
+}
+
+void ATank::SetTankLocationZ()
+{
+	FVector StartLocation = GetActorLocation();
+	FVector EndLocation = GetActorUpVector() *-1;
+	FHitResult HitResult;
+
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false);
+
+	if (HitResult.bBlockingHit)
+	{
+		FVector NewLocation = HitResult.ImpactPoint + FVector(0,0,GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight() + .1f);
+		//UE_LOG(LogTemp, Warning, TEXT("Ground Position: %s, and Height: %f"), *HitResult.ImpactPoint.ToString(), GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight());
+		SetActorLocation(NewLocation);
 	}
 }

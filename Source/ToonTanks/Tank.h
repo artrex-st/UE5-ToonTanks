@@ -34,6 +34,7 @@ private:
 	void Move(float Value);
 	void Turn(float Value);
 	void FollowCursor() const;
+	void SetTankLocationZ();
 
 	APlayerController* TankPlayerController;
 };

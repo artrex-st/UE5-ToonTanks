@@ -41,8 +41,8 @@ void ATower::CheckFireCondition()
 
 bool ATower::TargetLock() const
 {
-	FVector StartLocation = ProjectileSpawnPoint->GetComponentLocation();
-	FVector ForwardVector = ProjectileSpawnPoint->GetComponentRotation().Vector();
+	FVector StartLocation = GetProjectileSpawnPoint()->GetComponentLocation();
+	FVector ForwardVector = GetProjectileSpawnPoint()->GetComponentRotation().Vector();
 	FVector EndLocation = StartLocation + (ForwardVector * FireRange);
 
 	FHitResult HitResult;
