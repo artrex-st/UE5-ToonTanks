@@ -26,8 +26,9 @@ void ATower::BeginPlay()
 {
 	Super::BeginPlay();
 	Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
-	GetWorldTimerManager().SetTimer(FireRateTimerHandler, this, &ATower::CheckFireCondition, FireRate, true);
+	const float RandomDelay = FMath::FRandRange(-0.5f * FireRate, 0.5f * FireRate);
 	
+	GetWorldTimerManager().SetTimer(FireRateTimerHandler, this, &ATower::CheckFireCondition, FireRate + RandomDelay, true);
 }
 
 void ATower::CheckFireCondition()
