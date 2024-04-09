@@ -32,10 +32,33 @@ void ATower::BeginPlay()
 
 void ATower::CheckFireCondition()
 {
-	if (InFireRange())
+	if (InFireRange() && TargetLock())
 	{
 		Fire();
 	}
+}
+
+bool ATower::TargetLock() const
+{
+	FVector StartLocation = ProjectileSpawnPoint->GetComponentLocation();
+	FVector ForwardVector = ProjectileSpawnPoint->GetComponentRotation().Vector();
+	FVector EndLocation = StartLocation + (ForwardVector * FireRange);
+
+	FHitResult HitResult;
+
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+
+	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility, CollisionParams);
+	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Green, false);
+
+	if (HitResult.bBlockingHit)
+	{
+		AActor* HitActor = HitResult.GetActor();
+		return HitActor == Tank;
+	}
+
+	return false;
 }
 
 bool ATower::InFireRange() const

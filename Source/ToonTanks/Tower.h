@@ -31,5 +31,6 @@ private:
 
 	FTimerHandle FireRateTimerHandler;
 	void CheckFireCondition();
+	bool TargetLock() const;
 	bool InFireRange() const;
 };

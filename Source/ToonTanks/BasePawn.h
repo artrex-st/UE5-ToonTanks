@@ -21,6 +21,8 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Tower Movement")
 	double TurnInterpolateSpeed = 10;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	USceneComponent* ProjectileSpawnPoint;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -29,8 +31,6 @@ private:
 	UStaticMeshComponent* BaseMesh;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* TurretMesh;
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
-	USceneComponent* ProjectileSpawnPoint;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UParticleSystem* DeathParticles;
