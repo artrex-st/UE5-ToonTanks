@@ -11,6 +11,7 @@ class TOONTANKS_API ATank : public ABasePawn
 {
 	GENERATED_BODY()
 public:
+	bool bAlive = true;
 	ATank();
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void Tick(float DeltaTime) override;

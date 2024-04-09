@@ -34,6 +34,7 @@ void ATank::HandlerDestruction()
 	Super::HandlerDestruction();
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	bAlive = false;
 }
 
 void ATank::BeginPlay()

@@ -34,11 +34,11 @@ void ATower::CheckFireCondition()
 {
 	if (InFireRange())
 	{
-		Fire();	
+		Fire();
 	}
 }
 
 bool ATower::InFireRange() const
 {
-	return Tank && FVector::Dist(GetActorLocation(),Tank->GetActorLocation()) <= FireRange;
+	return Tank->bAlive && Tank && FVector::Dist(GetActorLocation(),Tank->GetActorLocation()) <= FireRange;
 }
