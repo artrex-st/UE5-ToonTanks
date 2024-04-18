@@ -8,11 +8,13 @@ void AToonTanksPlayerController::SetPlayerEnabledState(bool bPlayerEnabled)
 	if (bPlayerEnabled)
 	{
 		GetPawn()->EnableInput(this);
+		bShowMouseCursor = bPlayerEnabled;
+		DefaultMouseCursor = EMouseCursor::Crosshairs;
 	}
 	else
 	{
 		GetPawn()->DisableInput(this);
+		DefaultMouseCursor = EMouseCursor::Default;
 	}
 
-	bShowMouseCursor = bPlayerEnabled;
 }
