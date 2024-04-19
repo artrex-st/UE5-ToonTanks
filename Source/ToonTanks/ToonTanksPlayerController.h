@@ -6,13 +6,31 @@
 #include "GameFramework/PlayerController.h"
 #include "ToonTanksPlayerController.generated.h"
 
-/**
- * 
- */
+class UInputMappingContext;
+class UInputAction;
+class ATank;
+
 UCLASS()
 class TOONTANKS_API AToonTanksPlayerController : public APlayerController
 {
-	GENERATED_BODY()
 public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Contex")
+	TObjectPtr<UInputMappingContext> InputMappingContext;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Fire")
+	TObjectPtr<UInputAction> ActionFire;
+
 	void SetPlayerEnabledState(bool bPlayerEnabled);
+
+protected:
+	virtual void OnPossess(APawn* aPawn) override;
+	virtual void OnUnPossess() override;
+
+private:
+	GENERATED_BODY()
+	void HandleFire();
+
+	UPROPERTY()
+	TObjectPtr<UEnhancedInputComponent> EnhancedInputComponent = nullptr;
+	UPROPERTY()
+	TObjectPtr<ATank> Tank = nullptr;
 };

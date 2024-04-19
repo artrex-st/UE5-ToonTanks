@@ -14,10 +14,10 @@ class TOONTANKS_API ABasePawn : public APawn
 public:
 	ABasePawn();
 	virtual void HandlerDestruction();
+	void Fire();
 
 protected:
 	void RotateTurret(const FVector& LookAtTarget) const;
-	void Fire();
 
 	class UCapsuleComponent* GetCapsuleComponent() const
 	{
