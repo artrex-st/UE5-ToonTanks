@@ -20,7 +20,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
-	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
+	//PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 }
 
 void ATank::Tick(float DeltaTime)
@@ -44,12 +44,13 @@ void ATank::BeginPlay()
 	SetTankLocationZ();
 }
 
-void ATank::Move(float Value)
+void ATank::Move(FVector2D Value)
 {
 	const float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
 	FVector DeltaLocation = FVector::ZeroVector;
-	DeltaLocation.X = Value * TankSpeed * DeltaTime;
+	DeltaLocation.X = Value.X * TankSpeed * DeltaTime;
 	AddActorLocalOffset(DeltaLocation, true);
+	Turn(Value.Y);
 }
 
 void ATank::Turn(float Value)

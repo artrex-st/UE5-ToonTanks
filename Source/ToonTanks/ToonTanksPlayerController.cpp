@@ -67,7 +67,7 @@ void AToonTanksPlayerController::HandleMove(const FInputActionValue& InputAction
 {
 	if (Tank)
 	{
-		Tank->Move(InputAction.Get<float>());
+		Tank->Move(InputAction.Get<FVector2D>());
 	}
 }
 
