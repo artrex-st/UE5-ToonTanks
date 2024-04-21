@@ -19,9 +19,8 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
-	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
+	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
-	//PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATank::Fire);
 }
 
 void ATank::Tick(float DeltaTime)
@@ -61,7 +60,6 @@ void ATank::Turn(float Value)
 	AddActorLocalRotation(Rotation, true);
 }
 
-
 void ATank::FollowCursor() const
 {
 	if (TankPlayerController)
@@ -71,7 +69,6 @@ void ATank::FollowCursor() const
 		RotateTurret(HitResult.ImpactPoint);
 		//DrawDebugSphere(GetWorld(),HitResult.ImpactPoint,20,10, FColor::Emerald,false, -1);
 		//UE_LOG(LogTemp, Display, TEXT("Rotation: %s"), *(HitResult.ImpactPoint - Owner->GetActorLocation()).ToString());
-		
 	}
 }
 

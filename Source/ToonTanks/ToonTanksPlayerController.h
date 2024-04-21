@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "ToonTanksPlayerController.generated.h"
 
+struct FInputActionValue;
 class UInputMappingContext;
 class UInputAction;
 class ATank;
@@ -16,8 +17,12 @@ class TOONTANKS_API AToonTanksPlayerController : public APlayerController
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Contex")
 	TObjectPtr<UInputMappingContext> InputMappingContext;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Fire")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Combat")
 	TObjectPtr<UInputAction> ActionFire;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Move")
+	TObjectPtr<UInputAction> ActionMoveForward;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Input|Move")
+	TObjectPtr<UInputAction> ActionMoveRotate;
 
 	void SetPlayerEnabledState(bool bPlayerEnabled);
 
@@ -28,6 +33,7 @@ protected:
 private:
 	GENERATED_BODY()
 	void HandleFire();
+	void HandleMove(const FInputActionValue& InputAction);
 
 	UPROPERTY()
 	TObjectPtr<UEnhancedInputComponent> EnhancedInputComponent = nullptr;

@@ -18,6 +18,9 @@ public:
 	virtual void HandlerDestruction() override;
 	APlayerController* GetTankPlayerController() const { return TankPlayerController; }
 
+	void Move(float Value);
+	void Turn(float Value);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -31,8 +34,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Tank Movement")
 	double TurnRate = 100;
 
-	void Move(float Value);
-	void Turn(float Value);
 	void FollowCursor() const;
 	void SetTankLocationZ();
 

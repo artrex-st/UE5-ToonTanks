@@ -20,7 +20,12 @@ void AToonTanksPlayerController::OnPossess(APawn* aPawn)
 	if (ActionFire)
 	{
 		EnhancedInputComponent->BindAction(ActionFire, ETriggerEvent::Started, this, &AToonTanksPlayerController::HandleFire);
-		GEngine->AddOnScreenDebugMessage(-1,15,FColor::Orange,TEXT("Fite enhancedInput"));
+		//GEngine->AddOnScreenDebugMessage(-1,15,FColor::Orange,TEXT("Fite enhancedInput"));
+	}
+
+	if (ActionMoveForward)
+	{
+		EnhancedInputComponent->BindAction(ActionMoveForward, ETriggerEvent::Triggered, this, &AToonTanksPlayerController::HandleMove);
 	}
 }
 
@@ -55,6 +60,14 @@ void AToonTanksPlayerController::HandleFire()
 	if (Tank)
 	{
 		Tank->Fire();
+	}
+}
+
+void AToonTanksPlayerController::HandleMove(const FInputActionValue& InputAction)
+{
+	if (Tank)
+	{
+		Tank->Move(InputAction.Get<float>());
 	}
 }
 
