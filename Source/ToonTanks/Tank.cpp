@@ -18,9 +18,6 @@ ATank::ATank()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	//PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATank::Move);
-	//PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATank::Turn);
 }
 
 void ATank::Tick(float DeltaTime)
